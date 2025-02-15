@@ -55,7 +55,7 @@
     <h1>Happy Valentine ❤️</h1>
     <div class="smiley">😊</div>
     <p>Wishing you love and happiness!</p>
-    <audio id="bg-music" autoplay loop muted>
+    <audio id="bg-music" autoplay loop>
         <source src="FALLING LOVE.mp3" type="audio/mpeg">
     </audio>
     <button id="unmute-btn" onclick="unmuteMusic()">🔊 Click to Play Sound</button>
@@ -66,6 +66,7 @@
             music.play();
             document.getElementById("unmute-btn").style.display = "none";
         }
+        
         function createHeart() {
             let heart = document.createElement("div");
             heart.innerHTML = "❤️";
