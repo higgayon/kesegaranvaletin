@@ -21,6 +21,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             overflow: hidden;
+            position: relative;
         }
 
         h1 {
@@ -46,6 +47,7 @@
         canvas {
             display: block;
             background: transparent;
+            position: absolute;
         }
 
         /* Heart Animation */
@@ -59,6 +61,14 @@
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        @keyframes moveAround {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(10px, -10px); }
+            50% { transform: translate(-10px, 10px); }
+            75% { transform: translate(10px, 10px); }
+            100% { transform: translate(0, 0); }
         }
     </style>
 </head>
@@ -100,7 +110,8 @@
             ctx.strokeStyle = "black";
             ctx.lineWidth = 5;
             ctx.beginPath();
-            ctx.arc(150, 180, 40, Math.PI * (1 - progress), Math.PI * (1 + progress));
+            ctx.moveTo(120, 180);
+            ctx.quadraticCurveTo(150, 180 + progress * 20, 180, 180);
             ctx.stroke();
         }
 
@@ -128,9 +139,13 @@
             }, 4000);
         }
 
-        setInterval(createHeart, 500); // Spawn hearts every 0.5 seconds
+        function moveSmiley() {
+            canvas.style.animation = "moveAround 5s infinite ease-in-out";
+        }
 
+        setInterval(createHeart, 500); // Spawn hearts every 0.5 seconds
         animateSmiley();
+        moveSmiley();
     </script>
 </body>
 </html>
