@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day 💖</title>
+    <style>
+        body {
+            background-color: #ffcccc;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            color: #ff0066;
+            font-size: 50px;
+            margin-top: 50px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 30px;
+            animation: floatUp 3s infinite ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>💖 Happy Valentine's Day! 💖</h1>
+
+    <canvas id="smileyCanvas" width="200" height="200"></canvas>
+
+    <script>
+        // Draw Smiley Face
+        function drawSmiley() {
+            const canvas = document.getElementById("smileyCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // Face
+            ctx.beginPath();
+            ctx.arc(100, 100, 80, 0, Math.PI * 2);
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+            ctx.stroke();
+
+            // Eyes
+            ctx.beginPath();
+            ctx.arc(70, 80, 10, 0, Math.PI * 2);
+            ctx.arc(130, 80, 10, 0, Math.PI * 2);
+            ctx.fillStyle = "black";
+            ctx.fill();
+
+            // Smile
+            ctx.beginPath();
+            ctx.arc(100, 100, 50, 0.2 * Math.PI, 0.8 * Math.PI);
+            ctx.stroke();
+        }
+        drawSmiley();
+
+        // Floating Hearts Animation
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        setInterval(createHeart, 500);
+    </script>
+
+</body>
+</html>
