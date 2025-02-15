@@ -24,9 +24,15 @@
             position: relative;
         }
 
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
         h1 {
             color: red;
-            font-size: 28px;
+            font-size: 32px;
             margin-bottom: 20px;
         }
 
@@ -47,7 +53,7 @@
         canvas {
             display: block;
             background: transparent;
-            position: absolute;
+            margin-top: 20px;
         }
 
         /* Heart Animation */
@@ -73,13 +79,13 @@
     </style>
 </head>
 <body>
-    <h1>💖 Happy Valentine’s Day! 💖</h1>
+    <h1 id="title" class="fade-in">💖 Happy Valentine’s Day! 💖</h1>
 
-    <canvas id="smileyCanvas" width="300" height="300"></canvas>
+    <canvas id="smileyCanvas" width="300" height="300" class="fade-in"></canvas>
 
-    <div class="greeting">Wishing you love and happiness! 💕</div>
+    <div id="greeting" class="greeting fade-in">Wishing you love and happiness! 💕</div>
 
-    <audio id="bg-music" controls loop>
+    <audio id="bg-music" class="fade-in" controls loop>
         <source src="FALLING LOVE.mp3" type="audio/mpeg">
         Your browser does not support the audio tag.
     </audio>
@@ -123,7 +129,7 @@
                 drawMouth(progress);
                 progress += 0.02;
                 if (progress >= 1) clearInterval(interval);
-            }, 50); // Smooth transition over 3 seconds
+            }, 50);
         }
 
         function createHeart() {
@@ -143,9 +149,30 @@
             canvas.style.animation = "moveAround 5s infinite ease-in-out";
         }
 
-        setInterval(createHeart, 500); // Spawn hearts every 0.5 seconds
-        animateSmiley();
-        moveSmiley();
+        function fadeInElements() {
+            setTimeout(() => document.getElementById("title").style.opacity = "1", 500);
+            setTimeout(() => document.getElementById("title").style.transform = "translateY(0)", 500);
+            
+            setTimeout(() => {
+                document.getElementById("smileyCanvas").style.opacity = "1";
+                document.getElementById("smileyCanvas").style.transform = "translateY(0)";
+                animateSmiley();
+                moveSmiley();
+            }, 2000);
+
+            setTimeout(() => {
+                document.getElementById("greeting").style.opacity = "1";
+                document.getElementById("greeting").style.transform = "translateY(0)";
+            }, 3500);
+
+            setTimeout(() => {
+                document.getElementById("bg-music").style.opacity = "1";
+                document.getElementById("bg-music").style.transform = "translateY(0)";
+            }, 5000);
+        }
+
+        setInterval(createHeart, 500);
+        fadeInElements();
     </script>
 </body>
 </html>
