@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: red;
+        }
+        canvas {
+            background-color: white;
+            border-radius: 50%;
+            margin-top: 20px;
+        }
+        #cute-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: darkred;
+            margin-top: 20px;
+            opacity: 0; /* Start hidden */
+            transition: opacity 1s ease-in-out;
+        }
+        /* Style for music controls */
+        #music-controls {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ❤️ Valentine's Message -->
+    <h1>💖 Happy Valentine’s Day! 💖</h1>
+    <p>Wishing you love and happiness today and always!</p>
+
+    <!-- 🎭 Smiley Face -->
+    <canvas id="smileyCanvas" width="200" height="200"></canvas>
+
+    <!-- 📝 Cute Message -->
+    <p id="cute-message">You make my heart smile! 😊💖</p>
+
+    <!-- 🎵 Music Player -->
+    <div id="music-controls">
+        <audio id="bg-music">
+            <source src="https://your-username.github.io/happy-valentine/FALLING%20LOVE.mp3" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
+        <button onclick="toggleMusic()">🎵 Play/Pause</button>
+        <i
