@@ -3,58 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine</title>
+    <title>Happy Valentine!</title>
     <style>
         body {
             text-align: center;
             background-color: pink;
             font-family: Arial, sans-serif;
         }
+
+        #smileyCanvas {
+            background-color: white;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
         h1 {
             color: red;
-        }
-        canvas {
-            background-color: white;
-            border-radius: 50%;
+            font-size: 24px;
             margin-top: 20px;
         }
-        #cute-message {
+
+        .greeting {
             font-size: 20px;
             font-weight: bold;
-            color: darkred;
-            margin-top: 20px;
-            opacity: 0; /* Start hidden */
-            transition: opacity 1s ease-in-out;
-        }
-        /* Style for music controls */
-        #music-controls {
+            color: white;
+            background-color: red;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
             margin-top: 20px;
         }
-        button {
-            padding: 10px 15px;
-            font-size: 16px;
-            margin: 5px;
-            cursor: pointer;
+
+        #bg-music {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-
-    <!-- ❤️ Valentine's Message -->
     <h1>💖 Happy Valentine’s Day! 💖</h1>
-    <p>Wishing you love and happiness today and always!</p>
 
-    <!-- 🎭 Smiley Face -->
-    <canvas id="smileyCanvas" width="200" height="200"></canvas>
+    <canvas id="smileyCanvas" width="300" height="300"></canvas>
 
-    <!-- 📝 Cute Message -->
-    <p id="cute-message">You make my heart smile! 😊💖</p>
+    <div class="greeting">Wishing you love and happiness! 💕</div>
 
-    <!-- 🎵 Music Player -->
-    <div id="music-controls">
-        <audio id="bg-music">
-            <source src="https://your-username.github.io/happy-valentine/FALLING%20LOVE.mp3" type="audio/mpeg">
-            Your browser does not support the audio tag.
-        </audio>
-        <button onclick="toggleMusic()">🎵 Play/Pause</button>
-        <i
+    <audio id="bg-music" controls loop>
+        <source src="FALLING LOVE.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <script>
+        const canvas = document.getElementById("smileyCanvas");
+        const ctx = canvas.getContext("2d");
+
+        function drawFace() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Face
+            ctx.fillStyle = "yellow";
+            ctx.beginPath();
+            ctx.arc(150, 150, 100, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Eyes
+            ctx.fillStyle = "black";
+            ctx.beginPath();
+            ctx.arc(110, 120, 10, 0, Math.PI * 2);
+            ctx.arc(190, 120, 10, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawFlatMouth() {
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(110, 180);
+            ctx.lineTo(190, 180);
+            ctx.stroke();
+        }
+
+        function drawSmile() {
+            ctx.strokeStyle = "black";
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.arc(150, 180, 40, 0, Math.PI);
+            ctx.stroke();
+        }
+
+        function animateSmiley() {
+            drawFace();
+            drawFlatMouth(); // Start with flat mouth
+            setTimeout(() => {
+                drawFace();
+                drawSmile(); // Change to smile after 2 seconds
+            }, 2000);
+        }
+
+        animateSmiley();
+    </script>
+</body>
+</html>
