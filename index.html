@@ -3,176 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Valentine!</title>
+    <title>Happy Valentine</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+            text-align: center;
             background-color: pink;
             font-family: Arial, sans-serif;
-            text-align: center;
             overflow: hidden;
-            position: relative;
         }
-
-        .fade-in {
+        h1, p {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            animation: fadeIn 2s forwards;
         }
-
-        h1 {
-            color: red;
-            font-size: 32px;
-            margin-bottom: 20px;
+        .smiley {
+            font-size: 100px;
+            position: relative;
+            animation: smileyMove 5s infinite alternate ease-in-out;
         }
-
-        .greeting {
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
-            background-color: red;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        #bg-music {
-            margin-top: 20px;
-        }
-
-        canvas {
-            display: block;
-            background: transparent;
-            margin-top: 20px;
-        }
-
-        /* Heart Animation */
         .heart {
             position: absolute;
             color: red;
-            font-size: 20px;
-            animation: floatUp 4s linear infinite;
+            font-size: 30px;
+            animation: floatUp 7s linear infinite;
         }
-
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes smileyMove {
+            from { transform: translateY(0); }
+            to { transform: translateY(10px); }
+        }
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100vh); opacity: 0; }
-        }
-
-        @keyframes moveAround {
-            0% { transform: translate(0, 0); }
-            25% { transform: translate(10px, -10px); }
-            50% { transform: translate(-10px, 10px); }
-            75% { transform: translate(10px, 10px); }
-            100% { transform: translate(0, 0); }
+            100% { transform: translateY(-300px); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <h1 id="title" class="fade-in">💖 Happy Valentine’s Day! 💖</h1>
-
-    <canvas id="smileyCanvas" width="300" height="300" class="fade-in"></canvas>
-
-    <div id="greeting" class="greeting fade-in">Wishing you love and happiness! 💕</div>
-
-    <audio id="bg-music" class="fade-in" controls loop>
+    <h1>Happy Valentine ❤️</h1>
+    <div class="smiley">😊</div>
+    <p>Wishing you love and happiness!</p>
+    <audio id="bg-music" autoplay loop muted>
         <source src="FALLING LOVE.mp3" type="audio/mpeg">
-        Your browser does not support the audio tag.
     </audio>
-
+    <button id="unmute-btn" onclick="unmuteMusic()">🔊 Click to Play Sound</button>
     <script>
-        const canvas = document.getElementById("smileyCanvas");
-        const ctx = canvas.getContext("2d");
-
-        function drawFace() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Face
-            ctx.fillStyle = "yellow";
-            ctx.beginPath();
-            ctx.arc(150, 150, 100, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.stroke();
-
-            // Eyes
-            ctx.fillStyle = "black";
-            ctx.beginPath();
-            ctx.arc(110, 120, 10, 0, Math.PI * 2);
-            ctx.arc(190, 120, 10, 0, Math.PI * 2);
-            ctx.fill();
+        function unmuteMusic() {
+            let music = document.getElementById("bg-music");
+            music.muted = false;
+            music.play();
+            document.getElementById("unmute-btn").style.display = "none";
         }
-
-        function drawMouth(progress) {
-            ctx.strokeStyle = "black";
-            ctx.lineWidth = 5;
-            ctx.beginPath();
-            ctx.moveTo(120, 180);
-            ctx.quadraticCurveTo(150, 180 + progress * 20, 180, 180);
-            ctx.stroke();
-        }
-
-        function animateSmiley() {
-            drawFace();
-            let progress = 0; 
-            const interval = setInterval(() => {
-                drawFace();
-                drawMouth(progress);
-                progress += 0.02;
-                if (progress >= 1) clearInterval(interval);
-            }, 50);
-        }
-
         function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
+            let heart = document.createElement("div");
             heart.innerHTML = "❤️";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 2 + 2 + "s"; 
+            heart.className = "heart";
             document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 4000);
+            let startX = Math.random() * window.innerWidth;
+            heart.style.left = startX + "px";
+            heart.style.bottom = "0px";
+            setTimeout(() => heart.remove(), 7000);
         }
-
-        function moveSmiley() {
-            canvas.style.animation = "moveAround 5s infinite ease-in-out";
-        }
-
-        function fadeInElements() {
-            setTimeout(() => document.getElementById("title").style.opacity = "1", 500);
-            setTimeout(() => document.getElementById("title").style.transform = "translateY(0)", 500);
-            
-            setTimeout(() => {
-                document.getElementById("smileyCanvas").style.opacity = "1";
-                document.getElementById("smileyCanvas").style.transform = "translateY(0)";
-                animateSmiley();
-                moveSmiley();
-            }, 2000);
-
-            setTimeout(() => {
-                document.getElementById("greeting").style.opacity = "1";
-                document.getElementById("greeting").style.transform = "translateY(0)";
-            }, 3500);
-
-            setTimeout(() => {
-                document.getElementById("bg-music").style.opacity = "1";
-                document.getElementById("bg-music").style.transform = "translateY(0)";
-            }, 5000);
-        }
-
-        setInterval(createHeart, 500);
-        fadeInElements();
+        setInterval(createHeart, 2500); // Slower heart animation
     </script>
 </body>
 </html>
