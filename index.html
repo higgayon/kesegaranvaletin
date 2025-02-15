@@ -13,40 +13,52 @@
         }
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 90px;
+            font-size: 30px;
             color: #ff1493;
-            text-shadow: 5px 5px 10px rgba(255, 20, 147, 0.7);
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.7);
             opacity: 0;
             animation: fadeIn 2s forwards;
         }
         p {
-            font-size: 40px;
+            font-size: 15px;
             font-style: italic;
             color: #8b0000;
             opacity: 0;
-            animation: fadeIn 2s forwards;
+            animation: fadeIn 2s forwards 2s;
         }
         .smiley {
-            font-size: 250px;
+            font-size: 50px;
             position: relative;
+            margin: 5px auto;
+            display: inline-block;
             animation: smileyMove 5s infinite alternate ease-in-out;
         }
         .heart {
             position: absolute;
             color: red;
-            font-size: 50px;
-            animation: floatUp 7s linear infinite;
+            font-size: 20px;
+            animation: floatUp 10s linear infinite;
         }
         @keyframes fadeIn {
             to { opacity: 1; }
         }
         @keyframes smileyMove {
             from { transform: translateY(0); }
-            to { transform: translateY(20px); }
+            to { transform: translateY(8px); }
         }
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        #unmute-btn {
+            margin-top: 5px;
+            font-size: 12px;
+            padding: 4px;
+            background: #ff1493;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
@@ -55,7 +67,7 @@
     <h1>Happy Valentine ❤️</h1>
     <div class="smiley">😊</div>
     <p>Wishing you love and happiness!</p>
-    <audio id="bg-music" autoplay loop muted>
+    <audio id="bg-music" autoplay loop>
         <source src="FALLING LOVE.mp3" type="audio/mpeg">
     </audio>
     <button id="unmute-btn" onclick="unmuteMusic()">🔊 Click to Play Sound</button>
@@ -66,6 +78,7 @@
             music.play();
             document.getElementById("unmute-btn").style.display = "none";
         }
+        
         function createHeart() {
             let heart = document.createElement("div");
             heart.innerHTML = "❤️";
@@ -74,9 +87,9 @@
             let startX = Math.random() * window.innerWidth;
             heart.style.left = startX + "px";
             heart.style.bottom = "0px";
-            setTimeout(() => heart.remove(), 7000);
+            setTimeout(() => heart.remove(), 10000);
         }
-        setInterval(createHeart, 2500); // Slower heart animation
+        setInterval(createHeart, 3000); // Slower heart animation
     </script>
 </body>
 </html>
