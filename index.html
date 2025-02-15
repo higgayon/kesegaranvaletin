@@ -13,47 +13,63 @@
         }
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 30px;
+            font-size: 45px;
             color: #ff1493;
-            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.7);
+            text-shadow: 3px 3px 6px rgba(255, 20, 147, 0.7);
             opacity: 0;
             animation: fadeIn 2s forwards;
         }
         p {
-            font-size: 15px;
+            font-size: 22px;
             font-style: italic;
             color: #8b0000;
             opacity: 0;
             animation: fadeIn 2s forwards 2s;
         }
-        .smiley {
-            font-size: 50px;
+        .smiley-container {
             position: relative;
-            margin: 5px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 10px auto;
+        }
+        .smiley {
+            font-size: 75px;
+            position: relative;
             display: inline-block;
-            animation: smileyMove 5s infinite alternate ease-in-out;
+        }
+        .cat1 {
+            animation: moveCat1 5s infinite alternate ease-in-out;
+        }
+        .cat2 {
+            animation: moveCat2 5s infinite alternate ease-in-out;
         }
         .heart {
             position: absolute;
             color: red;
-            font-size: 20px;
+            font-size: 30px;
             animation: floatUp 10s linear infinite;
         }
         @keyframes fadeIn {
             to { opacity: 1; }
         }
-        @keyframes smileyMove {
+        @keyframes moveCat1 {
             from { transform: translateY(0); }
-            to { transform: translateY(8px); }
+            to { transform: translateY(15px); }
+        }
+        @keyframes moveCat2 {
+            from { transform: translateY(10px); }
+            to { transform: translateY(-5px); }
         }
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
         }
         #unmute-btn {
-            margin-top: 5px;
-            font-size: 12px;
-            padding: 4px;
+            margin-top: 10px;
+            font-size: 18px;
+            padding: 6px;
             background: #ff1493;
             color: white;
             border: none;
@@ -65,7 +81,10 @@
 </head>
 <body>
     <h1>Happy Valentine ❤️</h1>
-    <div class="smiley">😊</div>
+    <div class="smiley-container">
+        <div class="smiley cat1">😃</div>
+        <div class="smiley cat2">🐈</div>
+    </div>
     <p>Wishing you love and happiness!</p>
     <audio id="bg-music" autoplay loop>
         <source src="FALLING LOVE.mp3" type="audio/mpeg">
